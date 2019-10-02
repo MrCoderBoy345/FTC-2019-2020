@@ -84,7 +84,7 @@ import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocaliz
  */
 @Autonomous(name="Vuforia Nav customized for if on the red alliance", group ="Concept")
 
-public class ComputerVision extends LinearOpMode {
+public class VuforiaNavRed extends LinearOpMode {
 
     // IMPORTANT:  For Phone Camera, set 1) the camera source and 2) the orientation, based on how your phone is mounted:
     // 1) Camera Source.  Valid choices are:  BACK (behind screen) or FRONT (selfie side)
@@ -137,11 +137,18 @@ public class ComputerVision extends LinearOpMode {
     private float phoneYRotate    = 0;
     private float phoneZRotate    = 0;
 
-    private DcMotor leftDrive;
-    private DcMotor rightDrive;
-    private DcMotor left4Bar;
-    private DcMotor right4Bar;
-    private Servo clawServo;
+//    private DcMotor leftDrive;
+//    private DcMotor rightDrive;
+//    private DcMotor left4Bar;
+//    private DcMotor right4Bar;
+//    private Servo clawServo;
+
+    private  double leftDrive;
+    private double rightDrive;
+
+    private VuforiaTrackable trackedObject = null;
+    private boolean stoneInHand = false;
+    private VectorF translation;
 
     @Override public void runOpMode() {
         /*
@@ -213,11 +220,11 @@ public class ComputerVision extends LinearOpMode {
          *  coordinate system (the center of the field), facing up.
          */
 
-        leftDrive = hardwareMap.dcMotor.get("left_drive");
-        rightDrive = hardwareMap.dcMotor.get("right_drive");
-        left4Bar = hardwareMap.dcMotor.get("left_four_bar");
-        right4Bar = hardwareMap.dcMotor.get("right_four_bar");
-        clawServo = hardwareMap.servo.get("claw_servo");
+//        leftDrive = hardwareMap.dcMotor.get("left_drive");
+//        rightDrive = hardwareMap.dcMotor.get("right_drive");
+//        left4Bar = hardwareMap.dcMotor.get("left_four_bar");
+//        right4Bar = hardwareMap.dcMotor.get("right_four_bar");
+//        clawServo = hardwareMap.servo.get("claw_servo");
 
         // Set the position of the Stone Target.  Since it's not fixed in position, assume it's at the field origin.
         // Rotated it to to face forward, and raised it to sit on the ground correctly.
@@ -305,7 +312,7 @@ public class ComputerVision extends LinearOpMode {
         // Next, translate the camera lens to where it is on the robot.
         // In this example, it is centered (left to right), but forward of the middle of the robot, and above ground level.
         final float CAMERA_FORWARD_DISPLACEMENT  = -3.0f * mmPerInch;   // eg: Camera is 4 Inches in front of robot center
-        final float CAMERA_VERTICAL_DISPLACEMENT = 4.0f * mmPerInch;   // eg: Camera is 8 Inches above ground
+        final float CAMERA_VERTICAL_DISPLACEMENT = 8.0f * mmPerInch;   // eg: Camera is 8 Inches above ground
         final float CAMERA_LEFT_DISPLACEMENT     = 0;     // eg: Camera is ON the robot's center line
 
         OpenGLMatrix robotFromCamera = OpenGLMatrix
@@ -317,11 +324,8 @@ public class ComputerVision extends LinearOpMode {
             ((VuforiaTrackableDefaultListener) trackable.getListener()).setPhoneInformation(robotFromCamera, parameters.cameraDirection);
         }
 
-        VuforiaTrackable trackedObject = null;
-        boolean stoneInHand = false;
-
-        leftDrive.setDirection(DcMotorSimple.Direction.REVERSE);
-        right4Bar.setDirection(DcMotorSimple.Direction.REVERSE);
+//        leftDrive.setDirection(DcMotorSimple.Direction.REVERSE);
+//        right4Bar.setDirection(DcMotorSimple.Direction.REVERSE);
 
         // WARNING:
         // In this sample, we do not wait for PLAY to be pressed.  Target Tracking is started immediately when INIT is pressed.
@@ -340,94 +344,87 @@ public class ComputerVision extends LinearOpMode {
 
             // check all the trackable targets to see which one (if any) is visible.
             targetVisible = false;
-            if (((VuforiaTrackableDefaultListener)stoneTarget.getListener()).isVisible()) {
-                telemetry.addData("Visible Target", stoneTarget.getName());
-                targetVisible = true;
-                trackedObject = stoneTarget;
-                // getUpdatedRobotLocation() will return null if no new information is available since
-                // the last time that call was made, or if the trackable is not currently visible.
-                OpenGLMatrix robotLocationTransform = ((VuforiaTrackableDefaultListener)stoneTarget.getListener()).getUpdatedRobotLocation();
-                if (robotLocationTransform != null) {
-                    lastLocation = robotLocationTransform;
-                }
-            }
-            if (stoneInHand){
-                if (((VuforiaTrackableDefaultListener)rear1.getListener()).isVisible()) {
-                    telemetry.addData("Visible Target", rear1.getName());
+            if (stoneInHand == false) {
+                if (((VuforiaTrackableDefaultListener)stoneTarget.getListener()).isVisible()) {
+                    telemetry.addData("Visible Target", stoneTarget.getName());
                     targetVisible = true;
-                    trackedObject = rear1;
+                    trackedObject = stoneTarget;
                     // getUpdatedRobotLocation() will return null if no new information is available since
                     // the last time that call was made, or if the trackable is not currently visible.
-                    OpenGLMatrix robotLocationTransform = ((VuforiaTrackableDefaultListener) rear1.getListener()).getUpdatedRobotLocation();
-                    if (robotLocationTransform != null) {
-                        lastLocation = robotLocationTransform;
-                    }
+                    translation = ((VuforiaTrackableDefaultListener) stoneTarget.getListener()).getPose().getTranslation();
+                }
+            } else {
+                if (((VuforiaTrackableDefaultListener)rear2.getListener()).isVisible()) {
+                    telemetry.addData("Visible Target", rear2.getName());
+                    targetVisible = true;
+                    trackedObject = rear2;
+                    // get the translation to move to the tracker
+                    translation = ((VuforiaTrackableDefaultListener) rear2.getListener()).getPose().getTranslation();
+
                 }
             }
-            // Provide feedback as to where the robot is located (if we know).
             //pathfinds to the location of the nearest skystone
             if (targetVisible) {
                 if (trackedObject == stoneTarget) {
-                    rightDrive.setPower(0);
-                    // express position (translation) of robot in inches.
-                    VectorF translation = lastLocation.getTranslation();
-                    telemetry.addData("Pos (in)", "{X, Y, Z} = %.1f, %.1f, %.1f",
+                    rightDrive = (0);
+                    telemetry.addData("translation (in)", "{X, Y, Z} = %.1f, %.1f, %.1f",
                             translation.get(0) / mmPerInch, translation.get(1) / mmPerInch, translation.get(2) / mmPerInch);
 
-                    // express the rotation of the robot in degrees.
-                    Orientation rotation = Orientation.getOrientation(lastLocation, EXTRINSIC, XYZ, DEGREES);
-                    telemetry.addData("Rot (deg)", "{Roll, Pitch, Heading} = %.0f, %.0f, %.0f", rotation.firstAngle, rotation.secondAngle, rotation.thirdAngle);
+//                    // express the rotation of the robot in degrees.
+//                    Orientation rotation = Orientation.getOrientation(lastLocation, EXTRINSIC, XYZ, DEGREES);
+//                    telemetry.addData("Rot (deg)", "{Roll, Pitch, Heading} = %.0f, %.0f, %.0f", rotation.firstAngle, rotation.secondAngle, rotation.thirdAngle);
 
-                    float translationX = translation.get(0) / mmPerInch;
+                    float translationForward = translation.get(2) / mmPerInch;
 //                    float rotationPitch = rotation.secondAngle;
 
 
-                    if (translationX > 4) {
-                        leftDrive.setPower(.5);
-                        rightDrive.setPower(.5);
+                    if (translationForward < -4) {
+                        leftDrive = (.5);
+                        rightDrive = (.5);
                     } else {
-                        leftDrive.setPower(0);
-                        rightDrive.setPower(0);
+                        leftDrive = (0);
+                        rightDrive = (0);
                         targetVisible = false;
                         trackedObject = null;
                         stoneInHand = true;
                     }
                 }
                 //tracks the red rear target
-                if (trackedObject == rear1){
-                    leftDrive.setPower(0);
-                    // express position (translation) of robot in inches.
-                    VectorF translation = lastLocation.getTranslation();
-                    telemetry.addData("Pos (in)", "{X, Y, Z} = %.1f, %.1f, %.1f",
+                if (trackedObject == rear2){
+                    leftDrive = (0);
+                    telemetry.addData("translation (in)", "{X, Y, Z} = %.1f, %.1f, %.1f",
                             translation.get(0) / mmPerInch, translation.get(1) / mmPerInch, translation.get(2) / mmPerInch);
 
-                    // express the rotation of the robot in degrees.
-                    Orientation rotation = Orientation.getOrientation(lastLocation, EXTRINSIC, XYZ, DEGREES);
-                    telemetry.addData("Rot (deg)", "{Roll, Pitch, Heading} = %.0f, %.0f, %.0f", rotation.firstAngle, rotation.secondAngle, rotation.thirdAngle);
+//                    // express the rotation of the robot in degrees.
+//                    Orientation rotation = Orientation.getOrientation(lastLocation, EXTRINSIC, XYZ, DEGREES);
+//                    telemetry.addData("Rot (deg)", "{Roll, Pitch, Heading} = %.0f, %.0f, %.0f", rotation.firstAngle, rotation.secondAngle, rotation.thirdAngle);
 
-                    float translationX = translation.get(0) / mmPerInch;
+                    float translationForward = translation.get(2) / mmPerInch;
 //                    float rotationPitch = rotation.secondAngle;
 
-                    if (translationX > 10) {
-                        leftDrive.setPower(.5);
-                        rightDrive.setPower(.5);
+
+                    if (translationForward > 10) {
+                        leftDrive = (.5);
+                        rightDrive = (.5);
                     } else {
-                        leftDrive.setPower(0);
-                        rightDrive.setPower(0);
+                        leftDrive = (0);
+                        rightDrive = (0);
                     }
                 }
 
             } else {
                 telemetry.addData("Visible Target", "none");
                 if (stoneInHand){
-                    leftDrive.setPower(.25);
+                    //turn the robot right if it has a skystone in hand and can't see the rear target
+                    leftDrive = (.25);
                 } else{
-                    rightDrive.setPower(.25);
+                    //turn the robot right if it can't see a skystone
+                    rightDrive = (.25);
                 }
             }
-            telemetry.addData("left drive power: ",leftDrive.getPower());
-            telemetry.addData("right drive power: ",rightDrive.getPower());
-            telemetry.addData("servo position: ", clawServo.getPosition());
+            telemetry.addData("left drive power: ",leftDrive);
+            telemetry.addData("right drive power: ",rightDrive);
+//            telemetry.addData("servo position: ", clawServo.getPosition());
             telemetry.update();
         }
 
