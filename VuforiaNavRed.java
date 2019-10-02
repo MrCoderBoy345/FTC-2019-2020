@@ -137,14 +137,14 @@ public class VuforiaNavRed extends LinearOpMode {
     private float phoneYRotate    = 0;
     private float phoneZRotate    = 0;
 
-//    private DcMotor leftDrive;
-//    private DcMotor rightDrive;
-//    private DcMotor left4Bar;
-//    private DcMotor right4Bar;
-//    private Servo clawServo;
+   private DcMotor leftDrive;
+   private DcMotor rightDrive;
+   private DcMotor left4Bar;
+   private DcMotor right4Bar;
+   private Servo clawServo;
 
-    private  double leftDrive;
-    private double rightDrive;
+    // private  double leftDrive;
+    // private double rightDrive;
 
     private VuforiaTrackable trackedObject = null;
     private boolean stoneInHand = false;
@@ -220,11 +220,11 @@ public class VuforiaNavRed extends LinearOpMode {
          *  coordinate system (the center of the field), facing up.
          */
 
-//        leftDrive = hardwareMap.dcMotor.get("left_drive");
-//        rightDrive = hardwareMap.dcMotor.get("right_drive");
-//        left4Bar = hardwareMap.dcMotor.get("left_four_bar");
-//        right4Bar = hardwareMap.dcMotor.get("right_four_bar");
-//        clawServo = hardwareMap.servo.get("claw_servo");
+       leftDrive = hardwareMap.dcMotor.get("left_drive");
+       rightDrive = hardwareMap.dcMotor.get("right_drive");
+       left4Bar = hardwareMap.dcMotor.get("left_four_bar");
+       right4Bar = hardwareMap.dcMotor.get("right_four_bar");
+       clawServo = hardwareMap.servo.get("claw_servo");
 
         // Set the position of the Stone Target.  Since it's not fixed in position, assume it's at the field origin.
         // Rotated it to to face forward, and raised it to sit on the ground correctly.
@@ -366,7 +366,7 @@ public class VuforiaNavRed extends LinearOpMode {
             //pathfinds to the location of the nearest skystone
             if (targetVisible) {
                 if (trackedObject == stoneTarget) {
-                    rightDrive = (0);
+                    rightDrive.setPosition(0);
                     telemetry.addData("translation (in)", "{X, Y, Z} = %.1f, %.1f, %.1f",
                             translation.get(0) / mmPerInch, translation.get(1) / mmPerInch, translation.get(2) / mmPerInch);
 
@@ -379,11 +379,11 @@ public class VuforiaNavRed extends LinearOpMode {
 
 
                     if (translationForward < -4) {
-                        leftDrive = (.5);
-                        rightDrive = (.5);
+                        leftDrive.setPosition(.5);
+                        rightDrive.setPosition(.5);
                     } else {
-                        leftDrive = (0);
-                        rightDrive = (0);
+                        leftDrive.setPosition(0);
+                        rightDrive.setPosition(0);
                         targetVisible = false;
                         trackedObject = null;
                         stoneInHand = true;
@@ -391,7 +391,7 @@ public class VuforiaNavRed extends LinearOpMode {
                 }
                 //tracks the red rear target
                 if (trackedObject == rear2){
-                    leftDrive = (0);
+                    leftDrive.setPosition(0);
                     telemetry.addData("translation (in)", "{X, Y, Z} = %.1f, %.1f, %.1f",
                             translation.get(0) / mmPerInch, translation.get(1) / mmPerInch, translation.get(2) / mmPerInch);
 
@@ -404,11 +404,11 @@ public class VuforiaNavRed extends LinearOpMode {
 
 
                     if (translationForward > 10) {
-                        leftDrive = (.5);
-                        rightDrive = (.5);
+                        leftDrive.setPosition(.5);
+                        rightDrive.setPosition(.5);
                     } else {
-                        leftDrive = (0);
-                        rightDrive = (0);
+                        leftDrive.setPosition(0);
+                        rightDrive.setPosition(0);
                     }
                 }
 
@@ -416,15 +416,15 @@ public class VuforiaNavRed extends LinearOpMode {
                 telemetry.addData("Visible Target", "none");
                 if (stoneInHand){
                     //turn the robot right if it has a skystone in hand and can't see the rear target
-                    leftDrive = (.25);
+                    leftDrive.setPosition(.25);
                 } else{
                     //turn the robot right if it can't see a skystone
-                    rightDrive = (.25);
+                    rightDrive.setPosition(.25);
                 }
             }
-            telemetry.addData("left drive power: ",leftDrive);
-            telemetry.addData("right drive power: ",rightDrive);
-//            telemetry.addData("servo position: ", clawServo.getPosition());
+            telemetry.addData("left drive power: ",leftDrive.getPosition());
+            telemetry.addData("right drive power: ",rightDrive.getPosition());
+            telemetry.addData("servo position: ", clawServo.getPosition());
             telemetry.update();
         }
 
