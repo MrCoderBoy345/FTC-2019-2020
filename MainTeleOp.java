@@ -48,6 +48,7 @@ public class MainTeleOp extends LinearOpMode {
                 left4Bar.setPower(left4Bar.getPower() + gamepad1.left_stick_y/8); //attempt to move 4bar up/down with the joystick (NOT WORKING YET)
                 right4Bar.setPower(right4Bar.getPower() + gamepad1.right_stick_y/8);
 
+                // to do: change the claw so pressing some button will open it and vice verse for closing
                 clawServo.setPosition(clawServo.getPosition() + (gamepad1.right_stick_x *.01));
 
                 telemetry.addData("Claw Servo Position", clawServo.getPosition());
