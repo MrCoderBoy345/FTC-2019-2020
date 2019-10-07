@@ -82,7 +82,7 @@ import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocaliz
  * IMPORTANT: In order to use this OpMode, you need to obtain your own Vuforia license key as
  * is explained below.
  */
-@Autonomous(name="Vuforia Nav customized for if on the red alliance", group ="Concept")
+@Autonomous(name="Vuforia Nav customized for if on the red alliance", group ="")
 
 public class VuforiaNavRed extends LinearOpMode {
 
@@ -368,7 +368,7 @@ public class VuforiaNavRed extends LinearOpMode {
                     // float rotationPitch = rotation.secondAngle;
                     float translationForward = translation.get(2) / mmPerInch;
 
-                    // move foreward until the skystone is 4 inches away
+                    // move forward until the skystone is 4 inches away
                     if (translationForward < -4) {
                         leftDrive.setPower(.5);
                         rightDrive.setPower(.5);
@@ -392,7 +392,7 @@ public class VuforiaNavRed extends LinearOpMode {
                     // float rotationPitch = rotation.secondAngle;
                     float translationForward = translation.get(2) / mmPerInch;
 
-                    // moves foreward until the target is 10 inches away
+                    // moves forward until the target is 10 inches away
                     if (translationForward < -10) {
                         leftDrive.setPower(.5);
                         rightDrive.setPower(.5);

@@ -55,7 +55,7 @@ import static org.firstinspires.ftc.robotcore.external.navigation.AxesOrder.YZX;
 import static org.firstinspires.ftc.robotcore.external.navigation.AxesReference.EXTRINSIC;
 import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.CameraDirection.BACK;
 
-@Autonomous(name="Vuforia Nav customized for if on the red alliance", group ="Concept")
+@Autonomous(name="Vuforia Nav customized for if on the blue alliance", group ="")
 
 public class VuforiaNavBlue extends LinearOpMode {
 
