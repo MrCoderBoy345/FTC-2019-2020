@@ -240,8 +240,8 @@ public class VuforiaNavBlue extends LinearOpMode {
             ((VuforiaTrackableDefaultListener) trackable.getListener()).setPhoneInformation(robotFromCamera, parameters.cameraDirection);
         }
 
-       leftDrive.setDirection(DcMotorSimple.Direction.REVERSE);
-       right4Bar.setDirection(DcMotorSimple.Direction.REVERSE);
+       rightDrive.setDirection(DcMotorSimple.Direction.REVERSE);
+       left4Bar.setDirection(DcMotorSimple.Direction.REVERSE);
 
         waitForStart();
 
