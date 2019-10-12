@@ -228,7 +228,7 @@ public class VuforiaNavBlue extends LinearOpMode {
         // Next, translate the camera lens to where it is on the robot.
         // In this example, it is centered (left to right), but forward of the middle of the robot, and above ground level.
         final float CAMERA_FORWARD_DISPLACEMENT  = -3.0f * mmPerInch;   // eg: Camera is 4 Inches in front of robot center
-        final float CAMERA_VERTICAL_DISPLACEMENT = 8.0f * mmPerInch;   // eg: Camera is 8 Inches above ground
+        final float CAMERA_VERTICAL_DISPLACEMENT = 11.0f * mmPerInch;   // eg: Camera is 8 Inches above ground
         final float CAMERA_LEFT_DISPLACEMENT     = 0;     // eg: Camera is ON the robot's center line
 
         OpenGLMatrix robotFromCamera = OpenGLMatrix
@@ -240,8 +240,8 @@ public class VuforiaNavBlue extends LinearOpMode {
             ((VuforiaTrackableDefaultListener) trackable.getListener()).setPhoneInformation(robotFromCamera, parameters.cameraDirection);
         }
 
-       rightDrive.setDirection(DcMotorSimple.Direction.REVERSE);
-       left4Bar.setDirection(DcMotorSimple.Direction.REVERSE);
+       leftDrive.setDirection(DcMotorSimple.Direction.REVERSE);
+       right4Bar.setDirection(DcMotorSimple.Direction.REVERSE);
 
         waitForStart();
 
@@ -283,7 +283,7 @@ public class VuforiaNavBlue extends LinearOpMode {
                     // float rotationPitch = rotation.secondAngle;
                     float translationForward = translation.get(2) / mmPerInch;
 
-                    if (translationForward < -4) {
+                    if (translationForward < -14) {
                         leftDrive.setPower(.5);
                         rightDrive.setPower(.5);
                     } else {
@@ -305,7 +305,7 @@ public class VuforiaNavBlue extends LinearOpMode {
                     // float rotationPitch = rotation.secondAngle;
                     float translationForward = translation.get(2) / mmPerInch;
 
-                    if (translationForward < -10) {
+                    if (translationForward < -36) {
                         leftDrive.setPower(.5);
                         rightDrive.setPower(.5);
                     } else {

@@ -15,7 +15,7 @@ public class MainTeleOp extends LinearOpMode {
     private DcMotor right4Bar;
     private Servo clawServo;
 
-    static final double MAX_POS = 1;
+    static final double MAX_POS = .5;
     static  final double MIN_POS = 0;
 
     /**
@@ -28,17 +28,18 @@ public class MainTeleOp extends LinearOpMode {
         left4Bar = hardwareMap.dcMotor.get("left_four_bar");
         right4Bar = hardwareMap.dcMotor.get("right_four_bar");
         clawServo = hardwareMap.servo.get("claw_servo");
-        clawServo.setPosition(.5);
 
         // Reverse one of the drive motors.
         // You will have to determine which motor to reverse for your robot.
         // In this example, the right motor was reversed so that positive
         // applied power makes it move the robot in the forward direction.
         rightDrive.setDirection(DcMotorSimple.Direction.REVERSE);
-        left4Bar.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftDrive.setDirection(DcMotorSimple.Direction.REVERSE);
 
         waitForStart();
         if (opModeIsActive()) {
+            clawServo.setPosition(.5);
+
             // Put run blocks here.
             while (opModeIsActive()) {
                 // Put loop blocks here.
@@ -57,23 +58,23 @@ public class MainTeleOp extends LinearOpMode {
                  rightDrive.setPower(gamepad1.right_stick_y);
 
                 if (gamepad1.right_bumper){
-                    left4Bar.setPower(left4Bar.getPower() + .01); //move 4bar up with the right bumper (kinda finicky right now)
-                    right4Bar.setPower(right4Bar.getPower() + .01);
+                    left4Bar.setPower(left4Bar.getPower() + .005); //move 4bar up with the right bumper (kinda finicky right now)
+                    right4Bar.setPower(right4Bar.getPower() + .005);
                 }
                 if (gamepad1.left_bumper){
-                    left4Bar.setPower(left4Bar.getPower() - .01); //move 4bar down with the left bumper (kinda finicky right now)
-                    right4Bar.setPower(right4Bar.getPower() - .01);
+                    left4Bar.setPower(left4Bar.getPower() - .005); //move 4bar down with the left bumper (kinda finicky right now)
+                    right4Bar.setPower(right4Bar.getPower() - .005);
                 }
 
                 // to do: change the claw so pressing some button will open it and vice verse for closing
 
                 //if the servo's new position after being changed is greater than what is allowed, DON'T allow it to change in that direction
-                if (clawServo.getPosition() + (gamepad1.right_trigger *.001) < MAX_POS && gamepad1.left_trigger == 0) {
-                    clawServo.setPosition(clawServo.getPosition() + (gamepad1.right_trigger * .001));
+                if (clawServo.getPosition() + (gamepad1.right_trigger *.03) < MAX_POS && gamepad1.left_trigger == 0) {
+                    clawServo.setPosition(clawServo.getPosition() + (gamepad1.right_trigger * .03));
                 }
                 //^ reversed for LT
-                if (clawServo.getPosition() + (gamepad1.left_trigger *-.001) > MIN_POS && gamepad1.right_trigger == 0) {
-                    clawServo.setPosition(clawServo.getPosition() + (gamepad1.left_trigger * -.001));
+                if (clawServo.getPosition() + (gamepad1.left_trigger *-.03) > MIN_POS && gamepad1.right_trigger == 0) {
+                    clawServo.setPosition(clawServo.getPosition() + (gamepad1.left_trigger * -.03));
                 }
 
                 telemetry.addData("Claw Servo Position", clawServo.getPosition());
