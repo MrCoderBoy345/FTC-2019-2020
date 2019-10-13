@@ -34,7 +34,7 @@ public class MainTeleOp extends LinearOpMode {
         // In this example, the right motor was reversed so that positive
         // applied power makes it move the robot in the forward direction.
         rightDrive.setDirection(DcMotorSimple.Direction.REVERSE);
-        leftDrive.setDirection(DcMotorSimple.Direction.REVERSE);
+        left4Bar.setDirection(DcMotorSimple.Direction.REVERSE);
 
         waitForStart();
         if (opModeIsActive()) {
