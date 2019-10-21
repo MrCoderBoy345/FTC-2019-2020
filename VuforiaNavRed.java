@@ -1,3 +1,5 @@
+// probably not going to be updated due to issues with lighting and vision tracking
+
 /* Copyright (c) 2019 FIRST. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,

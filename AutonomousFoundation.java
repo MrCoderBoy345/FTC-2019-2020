@@ -5,8 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous(name = "Simplified autonomous", group = "")
-public class AutonomousSimple extends LinearOpMode {
+@Autonomous(name = "Autonomous Foundation Movement", group = "")
+public class AutonomousFoundation extends LinearOpMode {
 
     private DcMotorSimple leftDrive;
     private DcMotorSimple rightDrive;
@@ -37,7 +37,7 @@ public class AutonomousSimple extends LinearOpMode {
         midDrive.setDirection(DcMotorSimple.Direction.REVERSE);
 
         waitForStart();
-        if(opModeIsActive()) {
+        if (opModeIsActive()){
             clawServo.setPosition(.5);
             leftDrive.setPower(.5);
             rightDrive.setPower(.5);
@@ -53,6 +53,6 @@ public class AutonomousSimple extends LinearOpMode {
         telemetry.addData("Left Power", leftDrive.getPower());
         telemetry.addData("Right Power", rightDrive.getPower());
         telemetry.update();
-            sleep(50);
+        sleep(50);
     }
 }

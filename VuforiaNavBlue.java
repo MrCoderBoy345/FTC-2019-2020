@@ -1,3 +1,5 @@
+// PLEASE READ: If you want to figure out what this does, go to VuforiaNavRed.java for better explanations
+
 /* Copyright (c) 2019 FIRST. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -26,8 +28,6 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-// PLEASE READ: If you want to figure out what this does, go to VuforiaNavRed.java for better explanations
 
 package org.firstinspires.ftc.teamcode;
 
