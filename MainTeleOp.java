@@ -14,6 +14,8 @@ public class MainTeleOp extends LinearOpMode {
     private DcMotorSimple left4Bar;
     private DcMotorSimple right4Bar;
     private Servo clawServo;
+    private Servo foundationservo;
+
 
     /**
      * This function is executed when this Op Mode is selected from the Driver Station.
@@ -26,6 +28,7 @@ public class MainTeleOp extends LinearOpMode {
         left4Bar = hardwareMap.dcMotor.get("left_four_bar");
         right4Bar = hardwareMap.dcMotor.get("right_four_bar");
         clawServo = hardwareMap.servo.get("claw_servo");
+        foundationservo = hardwareMap.servo.get("foundation_servo");
 
         // Reverse one of the drive motors.
         // You will have to determine which motor to reverse for your robot.
@@ -67,6 +70,12 @@ public class MainTeleOp extends LinearOpMode {
                 //Y will open the servo
                 if (gamepad2.y) {
                     clawServo.setPosition(0.5);
+                }
+                if(gamepad2.a){
+                    foundationservo.setPosition(.6);
+                }
+                if(gamepad2.b){
+                    foundationservo.setPosition(0);
                 }
 
                 telemetry.addData("Claw Servo Position", clawServo.getPosition());

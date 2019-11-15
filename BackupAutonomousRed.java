@@ -5,8 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous(name = "Autonomous Foundation Movement", group = "")
-public class AutonomousFoundation extends LinearOpMode {
+@Autonomous(name = "Backup Autonomous  For Red", group = "")
+public class BackupAutonomousRed extends LinearOpMode {
 
     private DcMotorSimple leftDrive;
     private DcMotorSimple rightDrive;
@@ -14,6 +14,7 @@ public class AutonomousFoundation extends LinearOpMode {
     private DcMotorSimple left4Bar;
     private DcMotorSimple right4Bar;
     private Servo clawServo;
+    private Servo foundationservo;
 
     /**
      * This function is executed when this Op Mode is selected from the Driver Station.
@@ -26,6 +27,7 @@ public class AutonomousFoundation extends LinearOpMode {
         left4Bar = hardwareMap.dcMotor.get("left_four_bar");
         right4Bar = hardwareMap.dcMotor.get("right_four_bar");
         clawServo = hardwareMap.servo.get("claw_servo");
+        foundationservo = hardwareMap.servo.get("foundation_servo");
 
 
         // Reverse one of the drive motors.
@@ -37,13 +39,17 @@ public class AutonomousFoundation extends LinearOpMode {
         midDrive.setDirection(DcMotorSimple.Direction.REVERSE);
 
         waitForStart();
-        if (opModeIsActive()){
-            clawServo.setPosition(.5);
-            leftDrive.setPower(.5);
+        if(opModeIsActive()) {
+            clawServo.setPosition(-.5);
+            leftDrive.setPower(-.5);
             rightDrive.setPower(.5);
-            sleep(1200);
+            sleep(700);
             leftDrive.setPower(0);
             rightDrive.setPower(0);
+            sleep(400);
+            midDrive.setPower(1);
+            sleep(300);
+            midDrive.setPower(0);
         }
 
         telemetry.addData("Claw Servo Position", clawServo.getPosition());
@@ -53,6 +59,6 @@ public class AutonomousFoundation extends LinearOpMode {
         telemetry.addData("Left Power", leftDrive.getPower());
         telemetry.addData("Right Power", rightDrive.getPower());
         telemetry.update();
-        sleep(50);
+            sleep(50);
     }
 }
