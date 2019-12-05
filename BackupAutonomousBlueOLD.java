@@ -5,8 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous(name = "Backup Autonomous  For Red", group = "")
-public class BackupAutonomousRed extends LinearOpMode {
+@Autonomous(name = "Backup Autonomous For Blue", group = "")
+public class BackupAutonomousBlueOLD extends LinearOpMode {
 
     private DcMotorSimple leftDrive;
     private DcMotorSimple rightDrive;
@@ -47,7 +47,7 @@ public class BackupAutonomousRed extends LinearOpMode {
             leftDrive.setPower(0);
             rightDrive.setPower(0);
             sleep(400);
-            midDrive.setPower(1);
+            midDrive.setPower(-1);
             sleep(300);
             midDrive.setPower(0);
         }

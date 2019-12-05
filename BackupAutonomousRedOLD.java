@@ -5,8 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous(name = "Autonomous Foundation Movement For If Blue", group = "")
-public class AutonomousFoundationBlue extends LinearOpMode {
+@Autonomous(name = "Backup Autonomous  For Red", group = "")
+public class BackupAutonomousRedOLD extends LinearOpMode {
 
     private DcMotorSimple leftDrive;
     private DcMotorSimple rightDrive;
@@ -39,28 +39,16 @@ public class AutonomousFoundationBlue extends LinearOpMode {
         midDrive.setDirection(DcMotorSimple.Direction.REVERSE);
 
         waitForStart();
-        if (opModeIsActive()){
-            clawServo.setPosition(.4);
-            foundationservo.setPosition(.6);
-            midDrive.setPower(-.5);
-            sleep(1500);
-            midDrive.setPower(0);
+        if(opModeIsActive()) {
+            clawServo.setPosition(-.5);
             leftDrive.setPower(-.5);
-            rightDrive.setPower(-.5);
-            sleep(2000);
+            rightDrive.setPower(.5);
+            sleep(700);
             leftDrive.setPower(0);
             rightDrive.setPower(0);
-            foundationservo.setPosition(0);
-            sleep(1000);
-            leftDrive.setPower(1);
-            rightDrive.setPower(1);
-            sleep(2000);
-            leftDrive.setPower(0);
-            rightDrive.setPower(0);
-            foundationservo.setPosition(.6);
-            sleep(1000);
+            sleep(400);
             midDrive.setPower(1);
-            sleep(2600);
+            sleep(300);
             midDrive.setPower(0);
         }
 
@@ -71,6 +59,6 @@ public class AutonomousFoundationBlue extends LinearOpMode {
         telemetry.addData("Left Power", leftDrive.getPower());
         telemetry.addData("Right Power", rightDrive.getPower());
         telemetry.update();
-        sleep(50);
+            sleep(50);
     }
 }

@@ -1,12 +1,14 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous(name = "Autonomous Foundation Movement For If Red", group = "")
-public class AutonomousFoundationRed extends LinearOpMode {
+@Autonomous(name = "Simplified autonomous", group = "")
+@Disabled
+public class AutonomousSimpleOLD extends LinearOpMode {
 
     private DcMotorSimple leftDrive;
     private DcMotorSimple rightDrive;
@@ -39,32 +41,13 @@ public class AutonomousFoundationRed extends LinearOpMode {
         midDrive.setDirection(DcMotorSimple.Direction.REVERSE);
 
         waitForStart();
-        if (opModeIsActive()){
-            clawServo.setPosition(.4);
-            foundationservo.setPosition(.6);
-            midDrive.setPower(.5);
-            sleep(1040);
-            midDrive.setPower(0);
-            leftDrive.setPower(-.5);
-            rightDrive.setPower(-.5);
-            sleep(2000);
+        if(opModeIsActive()) {
+            clawServo.setPosition(.5);
+            leftDrive.setPower(.5);
+            rightDrive.setPower(.5);
+            sleep(1200);
             leftDrive.setPower(0);
             rightDrive.setPower(0);
-            foundationservo.setPosition(0);
-            sleep(1000);
-            leftDrive.setPower(1);
-            rightDrive.setPower(.97);
-            sleep(2000);
-            leftDrive.setPower(0);
-            rightDrive.setPower(0);
-            foundationservo.setPosition(.6);
-            sleep(1000);
-            rightDrive.setPower(-.5);
-            sleep(300);
-            rightDrive.setPower(0);
-            midDrive.setPower(-1);
-            sleep(3000);
-            midDrive.setPower(0);
         }
 
         telemetry.addData("Claw Servo Position", clawServo.getPosition());
@@ -74,6 +57,6 @@ public class AutonomousFoundationRed extends LinearOpMode {
         telemetry.addData("Left Power", leftDrive.getPower());
         telemetry.addData("Right Power", rightDrive.getPower());
         telemetry.update();
-        sleep(50);
+            sleep(50);
     }
 }
