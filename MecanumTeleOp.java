@@ -39,7 +39,7 @@ public class MecanumTeleOp extends LinearOpMode {
         // applied power makes it move the robot in the forward direction.
         leftFrontDrive.setDirection(DcMotorSimple.Direction.REVERSE);
         leftBackDrive.setDirection(DcMotorSimple.Direction.REVERSE);
-        right4Bar.setDirection(DcMotorSimple.Direction.REVERSE);
+        left4Bar.setDirection(DcMotorSimple.Direction.REVERSE);
 
         waitForStart();
         if (opModeIsActive()) {
@@ -58,8 +58,8 @@ public class MecanumTeleOp extends LinearOpMode {
                 leftBackDrive .setPower(vertical - horizontal + pivot);
 
                 if (gamepad2.left_stick_y < -.03 || gamepad2.left_stick_y > -.03) {
-                    left4Bar.setPower(-gamepad2.left_stick_y / 3); //move 4bar down with the left stick of the manipulator controller
-                    right4Bar.setPower(-gamepad2.left_stick_y / 3);
+                    left4Bar.setPower(-gamepad2.left_stick_y); //move 4bar down with the left stick of the manipulator controller
+                    right4Bar.setPower(-gamepad2.left_stick_y);
                 } else{
                     left4Bar.setPower(0);
                     right4Bar.setPower(0);
@@ -76,9 +76,11 @@ public class MecanumTeleOp extends LinearOpMode {
                 //open foundation
                 if(gamepad2.a){
                     foundationservo1.setPosition(.6);
+                    foundationservo2.setPosition(.6);
                 }
                 //close foundation
                 if(gamepad2.b){
+                    foundationservo1.setPosition(0);
                     foundationservo2.setPosition(0);
                 }
 
