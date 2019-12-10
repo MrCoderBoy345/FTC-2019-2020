@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @Autonomous(name = "Blue Foundation Auto", group = "")
-@Disabled
+
 public class FoundationBlue extends LinearOpMode {
 
     private DcMotor leftBackDrive;
