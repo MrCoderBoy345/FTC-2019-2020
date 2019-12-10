@@ -18,7 +18,7 @@ public class MecanumTeleOp extends LinearOpMode {
     private Servo clawServo;
     private Servo foundationservo1;
     private Servo foundationservo2;
-    private ColorSensor skystoneDetector;
+//    private ColorSensor skystoneDetector;
 
     /**
      * This function is executed when this Op Mode is selected from the Driver Station.
@@ -34,9 +34,9 @@ public class MecanumTeleOp extends LinearOpMode {
         clawServo = hardwareMap.servo.get("claw_servo");
         foundationservo1 = hardwareMap.servo.get("foundation_servo_1");
         foundationservo2 = hardwareMap.servo.get("foundation_servo_2");
-        skystoneDetector = hardwareMap.colorSensor.get("skystone_color_sensor");
+//        skystoneDetector = hardwareMap.colorSensor.get("skystone_color_sensor");
 
-        skystoneDetector.enableLed(false);
+//        skystoneDetector.enableLed(false);
 
         // Reverse one of the drive motors.
         // You will have to determine which motor to reverse for your robot.

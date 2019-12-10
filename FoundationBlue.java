@@ -21,7 +21,6 @@ public class FoundationBlue extends LinearOpMode {
     private Servo clawServo;
     private Servo foundationservo1;
     private Servo foundationservo2;
-    private ColorSensor skystoneDetector;
 
     /**
      * move left, backup until it sees a skystone, pick it up, go forward, drop in the build site, backup,
@@ -37,9 +36,6 @@ public class FoundationBlue extends LinearOpMode {
         clawServo = hardwareMap.servo.get("claw_servo");
         foundationservo1 = hardwareMap.servo.get("foundation_servo_1");
         foundationservo2 = hardwareMap.servo.get("foundation_servo_2");
-        skystoneDetector = hardwareMap.colorSensor.get("skystone_color_sensor");
-
-        skystoneDetector.enableLed(false);
 
         // Reverse some of the motors.
         leftFrontDrive.setDirection(DcMotorSimple.Direction.REVERSE);
