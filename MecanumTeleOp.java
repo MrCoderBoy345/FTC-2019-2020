@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -17,6 +18,7 @@ public class MecanumTeleOp extends LinearOpMode {
     private Servo clawServo;
     private Servo foundationservo1;
     private Servo foundationservo2;
+    private ColorSensor skystoneDetector;
 
     /**
      * This function is executed when this Op Mode is selected from the Driver Station.
@@ -32,6 +34,9 @@ public class MecanumTeleOp extends LinearOpMode {
         clawServo = hardwareMap.servo.get("claw_servo");
         foundationservo1 = hardwareMap.servo.get("foundation_servo_1");
         foundationservo2 = hardwareMap.servo.get("foundation_servo_2");
+        skystoneDetector = hardwareMap.colorSensor.get("skystone_color_sensor");
+
+        skystoneDetector.enableLed(false);
 
         // Reverse one of the drive motors.
         // You will have to determine which motor to reverse for your robot.
@@ -43,7 +48,7 @@ public class MecanumTeleOp extends LinearOpMode {
 
         waitForStart();
         if (opModeIsActive()) {
-            clawServo.setPosition(.5);
+            clawServo.setPosition(.4);
 
             // Put run blocks here.
             while (opModeIsActive()) {
@@ -71,7 +76,7 @@ public class MecanumTeleOp extends LinearOpMode {
                 }
                 //Y will open the servo
                 if (gamepad2.y) {
-                    clawServo.setPosition(0.5);
+                    clawServo.setPosition(0.4);
                 }
                 //open foundation
                 if(gamepad2.a){
