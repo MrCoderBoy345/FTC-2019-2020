@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@TeleOp(name = "Mecanum TeleOp", group = "")
-public class MecanumTeleOp extends LinearOpMode {
+@TeleOp(name = "if the claw fails...", group = "")
+public class PushBotTeleOp extends LinearOpMode {
 
     private DcMotorSimple leftBackDrive;
     private DcMotorSimple rightBackDrive;
@@ -52,8 +52,8 @@ public class MecanumTeleOp extends LinearOpMode {
 
             // Put run blocks here.
             while (opModeIsActive()) {
-                float vertical = -gamepad1.left_stick_y;
-                float horizontal = gamepad1.left_stick_x;
+                float vertical = gamepad1.left_stick_y;
+                float horizontal = -gamepad1.left_stick_x;
                 float pivot = gamepad1.right_stick_x;
 
                 //check wizards.exe's vid on how to program mecanums
