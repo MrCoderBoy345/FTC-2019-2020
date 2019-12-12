@@ -44,9 +44,6 @@ public class FoundationBlue extends LinearOpMode {
 
         waitForStart();
         if (opModeIsActive()) {
-            clawServo.setPosition(.4);
-            // foundationServo.setPosition();
-
             // Run with encoder
             rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             rightBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -63,7 +60,7 @@ public class FoundationBlue extends LinearOpMode {
             foundationservo2.setPosition(1);
             sleep(2000);
             moveForward(1);
-            sleep(3000);
+            sleep(2500);
             stopMoving();
             turnLeft(1);
             sleep(1500);
@@ -76,8 +73,15 @@ public class FoundationBlue extends LinearOpMode {
             foundationservo2.setPosition(0);
             sleep(1000);
             moveForward(.75);
-            sleep(2500);
+            sleep(1000);
+            moveLeft(1);
+            sleep(400);
             stopMoving();
+            moveForward(.75);
+            sleep(1300);
+            stopMoving();
+            clawServo.setPosition(.4);
+            sleep(3000);
         }
     }
     private void moveLeft(double power){

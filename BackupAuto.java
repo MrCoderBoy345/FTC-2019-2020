@@ -2,13 +2,13 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous(name = "Red Foundation Auto", group = "")
-public class FoundationRed extends LinearOpMode {
+@Autonomous(name = "Backup Autonomous", group = "")
+
+public class BackupAuto extends LinearOpMode {
 
     private DcMotor leftBackDrive;
     private DcMotor rightBackDrive;
@@ -48,35 +48,9 @@ public class FoundationRed extends LinearOpMode {
             leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             leftBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            moveLeft(.5);
-            sleep(900);
-            stopMoving();
-            moveForward(-.5);
-            sleep(3000);
-            stopMoving();
-            foundationservo1.setPosition(1);  //grab the foundation
-            foundationservo2.setPosition(1);
-            sleep(2000);
+            sleep(20000);
             moveForward(1);
-            sleep(2500);
-            stopMoving();
-            turnLeft(-1);
-            sleep(1500);
-            stopMoving();
-            sleep(500);
-            moveForward(-1);
-            sleep(3000);
-            stopMoving();
-            foundationservo1.setPosition(0);
-            foundationservo2.setPosition(0);
-            sleep(1000);
-            moveForward(.75);
-            sleep(1000);
-            moveLeft(-1);
-            sleep(1400);
-            stopMoving();
-            moveForward(.75);
-            sleep(1000);
+            sleep(2000);
             stopMoving();
             clawServo.setPosition(.4);
             sleep(3000);
