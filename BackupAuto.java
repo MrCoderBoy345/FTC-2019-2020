@@ -48,9 +48,9 @@ public class BackupAuto extends LinearOpMode {
             leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             leftBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            sleep(20000);
+            sleep(15000);
             moveForward(1);
-            sleep(2000);
+            sleep(1400);
             stopMoving();
             clawServo.setPosition(.4);
             sleep(3000);
