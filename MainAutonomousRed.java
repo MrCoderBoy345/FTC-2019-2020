@@ -56,44 +56,71 @@ public class MainAutonomousRed extends LinearOpMode {
             leftBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
             moveForward(.5);
-            sleep(3000);
+            sleep(2600);
             stopMoving();
-            moveLeft(.5);
-            while (skystoneDetector.alpha() <= 50){
+            moveLeft(.75);
+            while (skystoneDetector.red() > 20 && skystoneDetector.green() > 22){
                 //wait for it (being used as a sleep function)
             }
+            sleep(200);
             stopMoving();
-            clawServo.setPosition(1);
+            moveForward(.5);
+            sleep(500);
+            stopMoving();
+            clawServo.setPosition(1); //grab the stone
+            sleep(1500);
+            moveForward(-.75);
             sleep(1000);
-            moveForward(-.5);
+            stopMoving();
+            turnLeft(-1);
+            sleep(1200);
+            stopMoving();
+            moveLeft(.5);
             sleep(750);
             stopMoving();
-            moveLeft(-1);
-            sleep(7000);
+            sleep(1000);
+            moveForward(1); //drive to build site
+            sleep(3000);
             stopMoving();
-            clawServo.setPosition(.6);
+            sleep(1000);
+            turnLeft(1);
+            sleep(1000);
+            stopMoving();
+            clawServo.setPosition(.6); //release the skystone
+            sleep(2000);
+            turnLeft(-1); // line up with the foundation
+            sleep(1500);
+            stopMoving();
+            moveForward(-.5);
+            sleep(1200);
+            stopMoving();
+            moveLeft(.5);
+            sleep(750);
+            stopMoving();
+            // repeat the foundation code from FoundationRed.java
+            foundationservo1.setPosition(1);  //grab the foundation
+            foundationservo2.setPosition(1);
+            sleep(2000);
+            moveForward(1);
+            sleep(2500);
+            stopMoving();
             turnLeft(-1);
             sleep(1000);
             stopMoving();
-            moveForward(-.5);
             sleep(500);
+            moveForward(-1);
+            sleep(3000);
             stopMoving();
             foundationservo1.setPosition(0);
             foundationservo2.setPosition(0);
-            moveForward(1);
-            sleep(3000);
-            stopMoving();
-            turnLeft(-1);
-            sleep(2000);
-            stopMoving();
-            foundationservo1.setPosition(1);
-            foundationservo2.setPosition(1);
             sleep(1000);
-            rightBackDrive.setPower(-1);
-            sleep(1000);
-            rightBackDrive.setPower(0);
+            moveForward(.75);
+            sleep(1200);
             moveLeft(-1);
-            sleep(2000);
+            sleep(1300);
+            stopMoving();
+            moveForward(.75);
+            sleep(1000);
             stopMoving();
 
             telemetry.addData("Claw Servo Position", clawServo.getPosition());

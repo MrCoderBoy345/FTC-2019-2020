@@ -56,44 +56,48 @@ public class MainAutonomousBlue extends LinearOpMode {
             leftBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
             moveForward(.5);
-            sleep(2500);
+            sleep(2700);
             stopMoving();
-            moveLeft(-.5);
-            while (skystoneDetector.alpha() <= 55){
+            moveLeft(.5);
+            while (skystoneDetector.red()/skystoneDetector.blue() > 1.5 && skystoneDetector.green()/skystoneDetector.blue() > 1.5){
                 //wait for it (being used as a sleep function)
             }
+            sleep(300);
             stopMoving();
-            clawServo.setPosition(1);
-            sleep(1000);
+            clawServo.setPosition(1); //grab the stone
+            sleep(2000);
             moveForward(-.5);
             sleep(500);
             stopMoving();
-            moveLeft(1);
-            sleep(3000);
+            turnLeft(-1);
+            sleep(1000);
             stopMoving();
-            clawServo.setPosition(.6);
+            sleep(1000);
+            moveForward(1); //drive to build site
+            sleep(4000);
+            stopMoving();
+            sleep(1000);
             turnLeft(1);
             sleep(1000);
             stopMoving();
-            moveForward(-.5);
-            sleep(500);
+            sleep(2000);
+            clawServo.setPosition(.6); //release the skystone
+            turnLeft(-1);
+            sleep(1000);
+            stopMoving();
+            moveLeft(1);
+            sleep(1500);
             stopMoving();
             foundationservo1.setPosition(0);
             foundationservo2.setPosition(0);
-            moveForward(1);
-            sleep(3000);
-            stopMoving();
-            turnLeft(1);
-            sleep(2000);
-            stopMoving();
-            foundationservo1.setPosition(1);
-            foundationservo2.setPosition(1);
             sleep(1000);
-            leftBackDrive.setPower(-1);
+            moveForward(.75);
             sleep(1000);
-            leftBackDrive.setPower(0);
             moveLeft(1);
-            sleep(2000);
+            sleep(400);
+            stopMoving();
+            moveForward(.75);
+            sleep(1300);
             stopMoving();
 
             telemetry.addData("Claw Servo Position", clawServo.getPosition());

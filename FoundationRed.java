@@ -76,7 +76,7 @@ public class FoundationRed extends LinearOpMode {
             sleep(1300);
             stopMoving();
             moveForward(.75);
-            sleep(1000);
+            sleep(750);
             stopMoving();
             clawServo.setPosition(.4);
             sleep(3000);
