@@ -61,7 +61,7 @@ public class FoundationRed extends LinearOpMode {
             sleep(2500);
             stopMoving();
             turnLeft(-1);
-            sleep(1000);
+            sleep(1400);
             stopMoving();
             sleep(500);
             moveForward(-1);
