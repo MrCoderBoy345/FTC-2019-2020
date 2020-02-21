@@ -14,8 +14,6 @@ public class BackupAuto extends LinearOpMode {
     private DcMotor rightBackDrive;
     private DcMotor leftFrontDrive;
     private DcMotor rightFrontDrive;
-    private DcMotorSimple left4Bar;
-    private DcMotorSimple right4Bar;
     private Servo clawServo;
     private Servo foundationservo1;
     private Servo foundationservo2;
@@ -29,8 +27,6 @@ public class BackupAuto extends LinearOpMode {
         rightBackDrive = hardwareMap.dcMotor.get("right_back_drive");
         leftFrontDrive = hardwareMap.dcMotor.get("left_front_drive");
         rightFrontDrive = hardwareMap.dcMotor.get("right_front_drive");
-        left4Bar = (DcMotorSimple) hardwareMap.get("left_four_bar");
-        right4Bar = (DcMotorSimple) hardwareMap.get("right_four_bar");
         clawServo = hardwareMap.servo.get("claw_servo");
         foundationservo1 = hardwareMap.servo.get("foundation_servo_1");
         foundationservo2 = hardwareMap.servo.get("foundation_servo_2");
@@ -38,7 +34,6 @@ public class BackupAuto extends LinearOpMode {
         // Reverse some of the motors.
         leftFrontDrive.setDirection(DcMotorSimple.Direction.REVERSE);
         leftBackDrive.setDirection(DcMotorSimple.Direction.REVERSE);
-        left4Bar.setDirection(DcMotorSimple.Direction.REVERSE);
 
         waitForStart();
         if (opModeIsActive()) {
