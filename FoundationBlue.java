@@ -16,8 +16,8 @@ public class FoundationBlue extends LinearOpMode {
     private DcMotor rightBackDrive;
     private DcMotor leftFrontDrive;
     private DcMotor rightFrontDrive;
-    private DcMotorSimple left4Bar;
-    private DcMotorSimple right4Bar;
+//    private DcMotorSimple left4Bar;
+//    private DcMotorSimple right4Bar;
     private Servo clawServo;
     private Servo foundationservo1;
     private Servo foundationservo2;
@@ -31,8 +31,8 @@ public class FoundationBlue extends LinearOpMode {
         rightBackDrive = hardwareMap.dcMotor.get("right_back_drive");
         leftFrontDrive = hardwareMap.dcMotor.get("left_front_drive");
         rightFrontDrive = hardwareMap.dcMotor.get("right_front_drive");
-        left4Bar = (DcMotorSimple) hardwareMap.get("left_four_bar");
-        right4Bar = (DcMotorSimple) hardwareMap.get("right_four_bar");
+//        left4Bar = (DcMotorSimple) hardwareMap.get("left_four_bar");
+//        right4Bar = (DcMotorSimple) hardwareMap.get("right_four_bar");
         clawServo = hardwareMap.servo.get("claw_servo");
         foundationservo1 = hardwareMap.servo.get("foundation_servo_1");
         foundationservo2 = hardwareMap.servo.get("foundation_servo_2");
@@ -40,7 +40,7 @@ public class FoundationBlue extends LinearOpMode {
         // Reverse some of the motors.
         leftFrontDrive.setDirection(DcMotorSimple.Direction.REVERSE);
         leftBackDrive.setDirection(DcMotorSimple.Direction.REVERSE);
-        left4Bar.setDirection(DcMotorSimple.Direction.REVERSE);
+//        left4Bar.setDirection(DcMotorSimple.Direction.REVERSE);
 
         waitForStart();
         if (opModeIsActive()) {
@@ -56,11 +56,11 @@ public class FoundationBlue extends LinearOpMode {
             moveForward(-.5);
             sleep(2600);
             stopMoving();
-            foundationservo1.setPosition(1);
-            foundationservo2.setPosition(1);
+            foundationservo1.setPosition(.5);
+            foundationservo2.setPosition(.6);
             sleep(2000);
             moveForward(1);
-            sleep(2500);
+            sleep(3000);
             stopMoving();
             turnLeft(1);
             sleep(1500);
@@ -78,7 +78,7 @@ public class FoundationBlue extends LinearOpMode {
             sleep(600);
             stopMoving();
             moveForward(.75);
-            sleep(1300);
+            sleep(1500);
             stopMoving();
             clawServo.setPosition(.4);
             sleep(3000);

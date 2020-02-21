@@ -6,7 +6,10 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
+import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 @Autonomous(name = "Main Red Auto", group = "")
 @Disabled
@@ -22,9 +25,10 @@ public class MainAutonomousRed extends LinearOpMode {
     private Servo foundationservo1;
     private Servo foundationservo2;
     private ColorSensor skystoneDetector;
+    private DistanceSensor frontDistance;
 
     /**
-     * move left, backup until it sees a skystone, pick it up, go forward, drop in the build site, backup,
+     * move left, backup until it sees a skystone, pick it up, go forward, drop in the build site, backup,ove
      */
     @Override
     public void runOpMode() {
@@ -38,6 +42,8 @@ public class MainAutonomousRed extends LinearOpMode {
         foundationservo1 = hardwareMap.servo.get("foundation_servo_1");
         foundationservo2 = hardwareMap.servo.get("foundation_servo_2");
         skystoneDetector = hardwareMap.colorSensor.get("skystone_color_sensor");
+        frontDistance = hardwareMap.get(DistanceSensor.class, "skystone_color_sensor");
+
 
         // Reverse some of the motors.
         leftFrontDrive.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -56,31 +62,34 @@ public class MainAutonomousRed extends LinearOpMode {
             leftBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
             moveForward(.5);
-            sleep(2600);
+            sleep(1300);
             stopMoving();
             moveLeft(.75);
-            while (skystoneDetector.red() > 20 && skystoneDetector.green() > 22){
+            while ((skystoneDetector.red() / skystoneDetector.blue()) * (skystoneDetector.green() / skystoneDetector.blue()) > 0.2){
                 //wait for it (being used as a sleep function)
             }
-            sleep(200);
+            moveLeft(-.75);
+            while ((skystoneDetector.red() / skystoneDetector.blue()) * (skystoneDetector.green() / skystoneDetector.blue()) < 0.2){
+                //wait for it (being used as a sleep function)
+            }
             stopMoving();
             moveForward(.5);
             sleep(500);
             stopMoving();
             clawServo.setPosition(1); //grab the stone
-            sleep(1500);
+            sleep(500);
             moveForward(-.75);
-            sleep(1000);
+            sleep(500);
             stopMoving();
             turnLeft(-1);
-            sleep(1200);
+            sleep(600);
             stopMoving();
             moveLeft(.5);
             sleep(750);
             stopMoving();
-            sleep(1000);
+            sleep(500);
             moveForward(1); //drive to build site
-            sleep(3000);
+            sleep(1000);
             stopMoving();
             sleep(1000);
             turnLeft(1);
