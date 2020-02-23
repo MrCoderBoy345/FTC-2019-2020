@@ -38,16 +38,16 @@ public class BackupAuto extends LinearOpMode {
         waitForStart();
         if (opModeIsActive()) {
             // Run with encoder
-            rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            rightBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            leftBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//            rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//            rightBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//            leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//            leftBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            sleep(15000);
+//            sleep(15000);
             moveForward(1);
-            sleep(1400);
+            sleep(1000);
             stopMoving();
-            clawServo.setPosition(.4);
+            clawServo.setPosition(.5);
             sleep(3000);
         }
     }

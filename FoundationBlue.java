@@ -54,7 +54,7 @@ public class FoundationBlue extends LinearOpMode {
             sleep(1000);
             stopMoving();
             moveForward(-.5);
-            sleep(2600);
+            sleep(3000);
             stopMoving();
             foundationservo1.setPosition(.5);
             foundationservo2.setPosition(.6);

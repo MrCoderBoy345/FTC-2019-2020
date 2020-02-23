@@ -29,12 +29,12 @@ public class PushBotTeleOp extends LinearOpMode {
         rightBackDrive = hardwareMap.dcMotor.get("right_back_drive");
         leftFrontDrive = hardwareMap.dcMotor.get("left_front_drive");
         rightFrontDrive = hardwareMap.dcMotor.get("right_front_drive");
-        leftSlide = hardwareMap.dcMotor.get("left_slide_motor");
-        rightSlide = hardwareMap.dcMotor.get("right_slide_motor");
+//        leftSlide = hardwareMap.dcMotor.get("left_slide_motor");
+//        rightSlide = hardwareMap.dcMotor.get("right_slide_motor");
 
         clawServo = hardwareMap.servo.get("claw_servo");
-        foundationservo1 = hardwareMap.servo.get("foundation_servo_1");
-        foundationservo2 = hardwareMap.servo.get("foundation_servo_2");
+//        foundationservo1 = hardwareMap.servo.get("foundation_servo_1");
+//        foundationservo2 = hardwareMap.servo.get("foundation_servo_2");
 //        skystoneDetector = hardwareMap.colorSensor.get("skystone_color_sensor");
 
         // Reverse one of the drive motors.
@@ -51,8 +51,8 @@ public class PushBotTeleOp extends LinearOpMode {
 
             // Put run blocks here.
             while (opModeIsActive()) {
-                float vertical = gamepad1.left_stick_y;
-                float horizontal = -gamepad1.left_stick_x;
+                float vertical = -gamepad1.left_stick_y;
+                float horizontal = gamepad1.left_stick_x;
                 float pivot = gamepad1.right_stick_x;
 
                 //check wizards.exe's vid on how to program mecanums
@@ -61,13 +61,13 @@ public class PushBotTeleOp extends LinearOpMode {
                 leftFrontDrive.setPower(vertical + horizontal + pivot);
                 leftBackDrive .setPower(vertical - horizontal + pivot);
 
-                if (gamepad2.left_stick_y < -.05 || gamepad2.left_stick_y > -.05) {
-                    leftSlide.setPower(gamepad2.left_stick_y/2); //move 4bar down with the left stick of the manipulator controller
-                    rightSlide.setPower(gamepad2.left_stick_y/2);
-                } else{
-                    leftSlide.setPower(0);
-                    rightSlide.setPower(0);
-                }
+//                if (gamepad2.left_stick_y < -.05 || gamepad2.left_stick_y > -.05) {
+//                    leftSlide.setPower(gamepad2.left_stick_y/2); //move 4bar down with the left stick of the manipulator controller
+//                    rightSlide.setPower(gamepad2.left_stick_y/2);
+//                } else{
+//                    leftSlide.setPower(0);
+//                    rightSlide.setPower(0);
+//                }
 
                 //X will close the servo
                 if (gamepad2.x) {
@@ -78,15 +78,15 @@ public class PushBotTeleOp extends LinearOpMode {
                     clawServo.setPosition(0.5);
                 }
                 //open foundation
-                if(gamepad2.a){
-                    foundationservo1.setPosition(.5);
-                    foundationservo2.setPosition(.6);
-                }
-                //close foundation
-                if(gamepad2.b){
-                    foundationservo1.setPosition(.2);
-                    foundationservo2.setPosition(.2);
-                }
+//                if(gamepad2.a){
+//                    foundationservo1.setPosition(.5);
+//                    foundationservo2.setPosition(.6);
+//                }
+//                //close foundation
+//                if(gamepad2.b){
+//                    foundationservo1.setPosition(.2);
+//                    foundationservo2.setPosition(.2);
+//                }
 
                 telemetry.addData("Claw Servo Position", clawServo.getPosition());
 //                telemetry.addData("Left 4Bar Power", left4Bar.getPower());
